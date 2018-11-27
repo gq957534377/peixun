@@ -16,8 +16,8 @@ class TrainController extends Controller
     }
     public function show($id,Request $request)
     {
-        Excel::import(new TrainsImport(),'/users.xlsx');
-
-        return redirect('/')->with('success', 'All good!');
+        $res=Excel::import(new TrainsImport(),'/test.xlsx');
+dd($res);
+//        return redirect('/')->with('success', 'All good!');
     }
 }
