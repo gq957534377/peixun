@@ -14,7 +14,7 @@ class PositionController extends Controller
     {
         $where = [];
         $query = Position::where($where);
-        if (!empty($request->student)) {
+        if (!empty($request->user_name)) {
             $query = $query->where('user_name', 'like', '%' . $request->user_name . '%');
         }
         if (!empty($request->year)) {
@@ -23,7 +23,7 @@ class PositionController extends Controller
         if (!empty($request->team)) {
             $query = $query->where('team', 'like', '%' . $request->team . '%');
         }
-        if (!empty($request->case)) {
+        if (!empty($request->position)) {
             $query = $query->where('position', 'like', '%' . $request->position . '%');
         }
         if (!empty($request->type)) {
