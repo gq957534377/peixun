@@ -15,11 +15,13 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user_name')->nullable()->comment('员工姓名');
+            $table->string('tel')->nullable()->comment('手机号');
+            $table->string('type')->nullable()->comment('任职类型');
             $table->string('position')->nullable()->comment('职务');
             $table->string('year')->nullable()->comment('年度');
-            $table->unsignedInteger('user_id')->nullable()->comment('用户id');
-            $table->string('comment')->nullable()->comment('备注');
-            $table->string('name')->nullable()->comment('名字');
+            $table->string('team')->nullable()->comment('团队名称');
+            $table->string('remark')->nullable()->comment('备注');
 
             $table->timestamps();
         });

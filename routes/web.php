@@ -10,8 +10,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/uploadImg', 'PagesController@uploadImg');
     Route::group(['namespace' => 'Web'], function () {
         Route::resource('/users', 'UserController');
-        Route::resource('/trains', 'TrainController');
         Route::post('/reset_pwd/{user}', 'UserController@resetPwd');
+        Route::resource('/trains', 'TrainController');
+        Route::post('/trains/import', 'TrainController@import');
+        Route::resource('/positions', 'PositionController');
+        Route::post('/positions/import', 'PositionController@import');
+        Route::resource('/honors', 'HonorController');
+        Route::post('/honors/import', 'HonorController@import');
     });
     Route::group(['middleware' => 'email_verified'], function () {
     });
