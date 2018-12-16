@@ -23,28 +23,28 @@
               <div class="row">
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
                     <input type="text" value="{{request('year')}}" class="form-control" name="year"
                            placeholder="查询年度">
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-trophy"></i></span>
                     <input type="text" value="{{request('name')}}" class="form-control" name="name"
                            placeholder="查询荣誉名称">
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     <input type="text" value="{{request('user_name')}}" class="form-control" name="user_name"
                            placeholder="查询职工名称">
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
                     <input type="text" value="{{request('team')}}" class="form-control" name="team"
                            placeholder="查询服务队名称">
                   </div>

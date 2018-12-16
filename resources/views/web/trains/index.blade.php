@@ -24,28 +24,28 @@
 
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
                     <input type="text" value="{{request('year')}}" class="form-control" name="year"
                            placeholder="查询年度">
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
                     <input type="text" value="{{request('student')}}" class="form-control" name="student"
                            placeholder="查询学员名称">
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-user-plus"></i></span>
                     <input type="text" value="{{request('team')}}" class="form-control" name="team"
                            placeholder="查询服务队名称">
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-train"></i></span>
                     <input type="text" value="{{request('case')}}" class="form-control" name="case"
                            placeholder="查询培训类别">
                   </div>
