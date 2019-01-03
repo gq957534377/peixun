@@ -71,7 +71,7 @@ class HonorController extends Controller
         } catch (\Exception $exception) {
             return response()->json([
                 'code'    => 400,
-                'message' => '导入数据失败'
+                'message' => '导入数据失败,'.$exception->getMessage()
             ]);
         }
 
