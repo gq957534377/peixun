@@ -21,7 +21,7 @@ class CreateTrainsTable extends Migration
             $table->string('case')->nullable()->comment('培训类别');
             $table->string('team')->nullable()->comment('服务队名称');
             $table->string('student')->nullable()->comment('学员名字');
-            $table->string('student_tel',11)->nullable()->comment('联系方式');
+            $table->string('student_tel')->nullable()->comment('联系方式');
             $table->string('remark')->nullable()->comment('备注');
 
             $table->timestamps();
