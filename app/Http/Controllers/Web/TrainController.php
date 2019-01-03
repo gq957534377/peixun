@@ -56,8 +56,7 @@ class TrainController extends Controller
                     empty($row['year'])      ||
                     empty($row['course'])    ||
                     empty($row['team'])      ||
-                    empty($row['user_name']) ||
-                    empty($row['tel'])
+                    empty($row['user_name'])
                 ) {
                     continue;
                 }
