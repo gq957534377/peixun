@@ -75,10 +75,11 @@ class PositionController extends Controller
                 ]);
             }
         } catch (\Exception $exception) {
-            return response()->json([
-                'code'    => 400,
-                'message' => '导入数据失败,'.$exception->getMessage()
-            ]);
+            \Log::error($row['year'].'-'.$row['type'].'-'.$row['position'].'-'.$row['team'].'-'.$row['user_name'].'-'.$row['tel'].'未入库,原因:'.$exception->getMessage());
+//            return response()->json([
+//                'code'    => 400,
+//                'message' => '导入数据失败,'.$exception->getMessage()
+//            ]);
         }
 
 
