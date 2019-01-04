@@ -16,13 +16,13 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">主菜单</li>
-            <li @if(request()->path()=='/trains') class="active" @endif>
+            <li @if(request()->path()=='trains') class="active" @endif>
                 <a href="{{url('/trains')}}"><i class="fa fa-train"></i> <span>历年培训</span></a>
             </li>
-            <li @if(request()->path()=='/positions') class="active" @endif>
+            <li @if(request()->path()=='positions') class="active" @endif>
                 <a href="{{url('/positions')}}"><i class="fa fa-graduation-cap"></i> <span>历年任职</span></a>
             </li>
-            <li @if(request()->path()=='/honors') class="active" @endif>
+            <li @if(request()->path()=='honors') class="active" @endif>
                 <a href="{{url('/honors')}}"><i class="fa fa-trophy"></i> <span>历年荣誉</span></a>
             </li>
             <li @if(request()->path()=='telescope') class="active" @endif>
