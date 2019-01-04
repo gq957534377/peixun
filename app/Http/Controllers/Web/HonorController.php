@@ -69,11 +69,11 @@ class HonorController extends Controller
                 ]);
             }
         } catch (\Exception $exception) {
-            \Log::error($row['year'].'-'.$row['honor'].'-'.$row['team'].'-'.$row['user_name'].'未入库,原因:'.$exception->getMessage());
-//            return response()->json([
-//                'code'    => 400,
-//                'message' => '导入数据失败,'.$exception->getMessage()
-//            ]);
+//            \Log::error($row['year'].'-'.$row['honor'].'-'.$row['team'].'-'.$row['user_name'].'未入库,原因:'.$exception->getMessage());
+            return response()->json([
+                'code'    => 400,
+                'message' => '导入数据失败,'.$exception->getMessage()
+            ]);
         }
 
 
