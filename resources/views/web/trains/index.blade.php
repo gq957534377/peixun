@@ -78,7 +78,7 @@
                 <td>{{ $train->id }}</td>
                 <td>{{ $train->year }}</td>
                 <td>{{ $train->case }}</td>
-                <td>{{ $train->team }}</td>
+                <td><button class="btn btn-success">{{ $train->team }}</button></td>
                 <td>{{ $train->student }}</td>
                 <td>{{ $train->studen_tel ?? '无' }}</td>
                 <td>{{ $train->remark ?? '无' }}</td>
