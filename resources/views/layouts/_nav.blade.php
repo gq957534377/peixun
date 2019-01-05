@@ -25,9 +25,9 @@
             <li @if(request()->path()=='honors') class="active" @endif>
                 <a href="{{url('/honors')}}"><i class="fa fa-trophy"></i> <span>历年荣誉</span></a>
             </li>
-            <li @if(request()->path()=='telescope') class="active" @endif>
-                <a target="_blank" href="{{url('/telescope')}}"><i class="fa fa-fw fa-internet-explorer"></i> <span>访问管理</span></a>
-            </li>
+            {{--<li @if(request()->path()=='telescope') class="active" @endif>--}}
+                {{--<a target="_blank" href="{{url('/telescope')}}"><i class="fa fa-fw fa-internet-explorer"></i> <span>访问管理</span></a>--}}
+            {{--</li>--}}
         </ul>
     </section>
     <!-- /.sidebar -->
