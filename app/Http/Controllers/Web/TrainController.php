@@ -26,11 +26,34 @@ class TrainController extends Controller
         if (!empty($request->case)) {
             $query = $query->where('case', 'like', '%' . $request->case . '%');
         }
-        $trains = $query->orderBy('created_at', 'desc')
-            ->orderBy('id', 'desc')
-            ->paginate(15)
+        $trains = $query->paginate(15)
             ->appends($request->all());
         return view('web.trains.index', compact('trains'));
+    }
+
+    public function edit(Train $train)
+    {
+
+        return view('web.trains.edit',compact('train'));
+    }
+
+    public function update(Request $request,Train $train)
+    {
+        $train->update([
+            'year' => $request->year,
+            'case' => $request->case,
+            'team' => $request->team,
+            'student' => $request->student,
+            'student_tel' => $request->student_tel,
+            'remark' => $request->remark
+        ]);
+        return redirect('trains')->withErrors('修改成功', 'success');
+    }
+
+    public function destroy(Train $train)
+    {
+        $train->delete();
+        return response()->json(['StatusCode' => 200, 'ResultData' => '删除成功']);
     }
 
     public function import(Request $request)

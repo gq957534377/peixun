@@ -26,9 +26,7 @@ class HonorController extends Controller
         if (!empty($request->name)) {
             $query = $query->where('name', 'like', '%' . $request->name . '%');
         }
-        $honors = $query->orderBy('created_at', 'desc')
-            ->orderBy('id', 'desc')
-            ->paginate(15)
+        $honors = $query->paginate(15)
             ->appends($request->all());
         return view('web.honor.index', compact('honors'));
     }

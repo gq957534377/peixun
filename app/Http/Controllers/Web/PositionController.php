@@ -29,9 +29,7 @@ class PositionController extends Controller
         if (!empty($request->type)) {
             $query = $query->where('type', 'like', '%' . $request->type . '%');
         }
-        $positions = $query->orderBy('created_at', 'desc')
-            ->orderBy('id', 'desc')
-            ->paginate(15)
+        $positions = $query->paginate(15)
             ->appends($request->all());
         return view('web.position.index', compact('positions'));
     }

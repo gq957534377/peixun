@@ -25,8 +25,12 @@
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-                    <input type="text" value="{{request('year')}}" class="form-control" name="year"
-                           placeholder="查询年度">
+                    <select class="form-control" name="year" id="">
+                      <option value="">查询年度</option>
+                      @foreach(\App\Models\Train::yearList() as $item)
+                        <option @if(request('year') == $item) selected @endif value="{{$item}}">{{ $item }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
@@ -46,8 +50,13 @@
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-train"></i></span>
-                    <input type="text" value="{{request('case')}}" class="form-control" name="case"
-                           placeholder="查询培训类别">
+                    <select class="form-control" name="case" id="">
+                      <option value="">查询培训类别</option>
+                      @foreach(\App\Models\Train::caseList() as $item)
+                        <option @if(request('case') == $item) selected @endif value="{{$item}}">{{ $item }}</option>
+                      @endforeach
+                    </select>
+
                   </div>
                 </div>
                 <div class="col-lg-6 margin-bottom">
@@ -72,6 +81,7 @@
                 <th>人员名称</th>
                 <th>联系方式</th>
                 <th>备注</th>
+                <th>操作</th>
               </tr>
               @foreach($trains as $train)
               <tr>
@@ -82,6 +92,13 @@
                 <td>{{ $train->student }}</td>
                 <td>{{ $train->studen_tel ?? '无' }}</td>
                 <td>{{ $train->remark ?? '无' }}</td>
+                <td>
+                  <a href="{{route('trains.edit', $train)}}" class="btn btn-primary">
+                    <i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="修改"></i>
+                    修改</a>
+                  <a href="javascript:;" data-id="{{$train->id}}"
+                       class="del dropdown-item btn btn-danger">删除</a>
+                </td>
               </tr>
               @endforeach
             </table>
@@ -164,5 +181,67 @@
             }
         });
     }
+
+    $('.del').click(function () {
+        var This = $(this);
+        swal({
+            title: '确定删除吗？',
+            text: '',
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: '确认',
+            cancelButtonText: "取消",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: '/trains/' + This.data('id'),
+                    type: 'DELETE',
+                    data: {
+                        _token: $('meta[name=csrf-token]').attr('content'),
+                    },
+                    success: function (data) {
+                        if (data.StatusCode === 200) {
+                            swal({
+                                title: '成功！',
+                                text: "删除成功",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: '确认',
+                                closeOnConfirm: false
+                            }, function (isConfirm) {
+                                window.location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: data.ResultData,
+                                text: data.StatusCode,
+                                type: "warning",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: '确认',
+                                closeOnConfirm: false
+                            });
+
+                        }
+
+                    },
+                    error: function (error) {
+                        if (error.status === 422) {
+                            alert(error.responseJSON.errors[Object.keys(error.responseJSON.errors)[0]][0]);
+                            return;
+                        }
+                        alert('服务异常，请联系管理员');
+                    }
+                });
+            } else {
+                swal("取消", '已取消删除', "error");
+            }
+        });
+    });
+
   </script>
 @stop
