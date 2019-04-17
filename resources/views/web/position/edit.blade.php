@@ -1,6 +1,6 @@
 @extends ('layouts.master')
 
-@section ('title', '历年培训')
+@section ('title', '历年任职')
 
 @section('styles')
 @endsection
@@ -12,7 +12,7 @@
 
             <div class="col-sm-5">
                 <h1>
-                    历年培训
+                    历年任职
                 </h1>
             </div><!--col-->
         </div><!--row-->
@@ -21,7 +21,7 @@
     <!-- Main content -->
     <section class="content">
         @include('layouts.errors')
-        <form class="form-horizontal" method="post" action="{{ route('trains.update',$train) }}">
+        <form class="form-horizontal" method="post" action="{{ route('positions.update',$position) }}">
             <div class="box-body">
                 {{csrf_field()}}
                 {{ method_field('PUT') }}
@@ -31,17 +31,17 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control"
-                                   value="{{$train->year}}"
+                                   value="{{$position->year}}"
                                    placeholder="年度" name="year">
                         </div>
                     </div>
                     <div class="col-lg-4 margin-bottom">
-                        <label>类别</label>
+                        <label>职位类别</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control"
-                                   value="{{$train->case}}"
-                                   placeholder="类别" name="case">
+                                   value="{{$position->type}}"
+                                   placeholder="职位类别" name="type">
                         </div>
                     </div>
                     <div class="col-lg-4 margin-bottom">
@@ -49,33 +49,42 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control"
-                                   value="{{$train->team}}"
+                                   value="{{$position->team}}"
                                    placeholder="团队名称" name="team">
                         </div>
                     </div>
                     <div class="col-lg-4 margin-bottom">
-                        <label>学生名称</label>
+                        <label>人员名称</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control"
-                                   value="{{$train->student}}"
-                                   placeholder="学生名称" name="student">
+                                   value="{{$position->user_name}}"
+                                   placeholder="人员名称" name="user_name">
                         </div>
                     </div>
                     <div class="col-lg-4 margin-bottom">
-                        <label>学生电话</label>
+                        <label>联系电话</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             <input type="text" class="form-control"
-                                   value="{{$train->student_tel}}"
-                                   placeholder=学生电话 name="student_tel">
+                                   value="{{$position->tel}}"
+                                   placeholder=联系电话 name="tel">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 margin-bottom">
+                        <label>职位名称</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control"
+                                   value="{{$position->position}}"
+                                   placeholder="职位名称" name="position">
                         </div>
                     </div>
                     <div class="col-lg-4 margin-bottom">
                         <label>备注</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input type="text" class="form-control submission" name="remark" value="{{$train->remark}}" placeholder="请填写备注">
+                            <input type="text" class="form-control submission" name="remark" value="{{$position->remark}}" placeholder="请填写备注">
                         </div>
                     </div>
                 </div>
@@ -84,7 +93,7 @@
             <center>
                 <button type="submit" class="btn btn-info">更新</button>
                 <button type="reset" class="btn btn-danger">重置</button>
-                <a href="{{ route('trains.index') }}" class="btn btn-success">返回</a>
+                <a href="{{ route('positions.index') }}" class="btn btn-success">返回</a>
             </center>
         </form>
     </section>

@@ -34,6 +34,32 @@ class PositionController extends Controller
         return view('web.position.index', compact('positions'));
     }
 
+    public function edit(Position $position)
+    {
+
+        return view('web.position.edit', compact('position'));
+    }
+
+    public function update(Request $request, Position $position)
+    {
+        $position->update([
+            'year'      => $request->year,
+            'type'      => $request->type,
+            'team'      => $request->team,
+            'user_name' => $request->user_name,
+            'tel'       => $request->tel,
+            'position'  => $request->position,
+            'remark'    => $request->remark
+        ]);
+        return redirect('positions')->withErrors('修改成功', 'success');
+    }
+
+    public function destroy(Position $position)
+    {
+        $position->delete();
+        return response()->json(['StatusCode' => 200, 'ResultData' => '删除成功']);
+    }
+
     public function import(Request $request)
     {
         if (!$request->hasFile('file')) {
@@ -73,7 +99,7 @@ class PositionController extends Controller
                 ]);
             }
         } catch (\Exception $exception) {
-            \Log::error($row['year'].'-'.$row['type'].'-'.$row['position'].'-'.$row['team'].'-'.$row['user_name'].'-'.$row['tel'].'未入库,原因:'.$exception->getMessage());
+            \Log::error($row['year'] . '-' . $row['type'] . '-' . $row['position'] . '-' . $row['team'] . '-' . $row['user_name'] . '-' . $row['tel'] . '未入库,原因:' . $exception->getMessage());
 //            return response()->json([
 //                'code'    => 400,
 //                'message' => '导入数据失败,'.$exception->getMessage()

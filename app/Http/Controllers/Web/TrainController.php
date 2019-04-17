@@ -34,18 +34,18 @@ class TrainController extends Controller
     public function edit(Train $train)
     {
 
-        return view('web.trains.edit',compact('train'));
+        return view('web.trains.edit', compact('train'));
     }
 
-    public function update(Request $request,Train $train)
+    public function update(Request $request, Train $train)
     {
         $train->update([
-            'year' => $request->year,
-            'case' => $request->case,
-            'team' => $request->team,
-            'student' => $request->student,
+            'year'        => $request->year,
+            'case'        => $request->case,
+            'team'        => $request->team,
+            'student'     => $request->student,
             'student_tel' => $request->student_tel,
-            'remark' => $request->remark
+            'remark'      => $request->remark
         ]);
         return redirect('trains')->withErrors('修改成功', 'success');
     }

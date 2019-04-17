@@ -24,15 +24,23 @@
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-get-pocket"></i></span>
-                    <input type="text" value="{{request('type')}}" class="form-control" name="type"
-                           placeholder="查询任职类别">
+                    <select class="form-control" name="type" id="">
+                      <option value="">查询任职类别</option>
+                      @foreach(\App\Models\Position::typeList() as $item)
+                        <option @if(request('type') == $item) selected @endif value="{{$item}}">{{ $item }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-                    <input type="text" value="{{request('year')}}" class="form-control" name="year"
-                           placeholder="查询年度">
+                    <select class="form-control" name="year" id="">
+                      <option value="">查询年度</option>
+                      @foreach(\App\Models\Position::yearList() as $item)
+                        <option @if(request('year') == $item) selected @endif value="{{$item}}">{{ $item }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
                 <div class="col-lg-3 margin-bottom">
@@ -79,6 +87,7 @@
                 <th>团队名称</th>
                 <th>任职类别</th>
                 <th>备注</th>
+                <th>曹祖平</th>
               </tr>
               @foreach($positions as $position)
               <tr>
@@ -90,6 +99,13 @@
                 <td><button class="btn btn-success">{{ $position->team }}</button></td>
                 <td>{{ $position->type }}</td>
                 <td>{{ $position->remark ?? '' }}</td>
+                <td>
+                  <a href="{{route('positions.edit', $position)}}" class="btn btn-primary">
+                    <i class="fa fa-edit" data-toggle="tooltip" data-placement="top" title="修改"></i>
+                    修改</a>
+                  <a href="javascript:;" data-id="{{$position->id}}"
+                     class="del dropdown-item btn btn-danger">删除</a>
+                </td>
               </tr>
               @endforeach
             </table>
@@ -172,5 +188,65 @@
             }
         });
     }
+    $('.del').click(function () {
+        var This = $(this);
+        swal({
+            title: '确定删除吗？',
+            text: '',
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: '确认',
+            cancelButtonText: "取消",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: '/positions/' + This.data('id'),
+                    type: 'DELETE',
+                    data: {
+                        _token: $('meta[name=csrf-token]').attr('content'),
+                    },
+                    success: function (data) {
+                        if (data.StatusCode === 200) {
+                            swal({
+                                title: '成功！',
+                                text: "删除成功",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: '确认',
+                                closeOnConfirm: false
+                            }, function (isConfirm) {
+                                window.location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: data.ResultData,
+                                text: data.StatusCode,
+                                type: "warning",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: '确认',
+                                closeOnConfirm: false
+                            });
+
+                        }
+
+                    },
+                    error: function (error) {
+                        if (error.status === 422) {
+                            alert(error.responseJSON.errors[Object.keys(error.responseJSON.errors)[0]][0]);
+                            return;
+                        }
+                        alert('服务异常，请联系管理员');
+                    }
+                });
+            } else {
+                swal("取消", '已取消删除', "error");
+            }
+        });
+    });
   </script>
 @stop

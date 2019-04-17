@@ -31,6 +31,30 @@ class HonorController extends Controller
         return view('web.honor.index', compact('honors'));
     }
 
+    public function edit(Honor $honor)
+    {
+
+        return view('web.honor.edit', compact('honor'));
+    }
+
+    public function update(Request $request, Honor $honor)
+    {
+        $honor->update([
+            'year'      => $request->year,
+            'name'      => $request->name,
+            'team'      => $request->team,
+            'user_name' => $request->user_name,
+            'remark'    => $request->remark
+        ]);
+        return redirect('honors')->withErrors('修改成功', 'success');
+    }
+
+    public function destroy(Honor $honor)
+    {
+        $honor->delete();
+        return response()->json(['StatusCode' => 200, 'ResultData' => '删除成功']);
+    }
+
     public function import(Request $request)
     {
         if (!$request->hasFile('file')) {
@@ -67,7 +91,7 @@ class HonorController extends Controller
                 ]);
             }
         } catch (\Exception $exception) {
-            \Log::error($row['year'].'-'.$row['honor'].'-'.$row['team'].'-'.$row['user_name'].'未入库,原因:'.$exception->getMessage());
+            \Log::error($row['year'] . '-' . $row['honor'] . '-' . $row['team'] . '-' . $row['user_name'] . '未入库,原因:' . $exception->getMessage());
 //            return response()->json([
 //                'code'    => 400,
 //                'message' => '导入数据失败,'.$exception->getMessage()
